@@ -16,46 +16,24 @@ var connection = mysql.createConnection({
 
 var cats = new HashMap();
 
-cats.set("Jobs",16);
-cats.set("Customer Service",91);
-cats.set("IT",92);
-cats.set("Online",93);
-cats.set("Marketing",94);
-cats.set("Advertising & PR",95);
-cats.set("Sales",96);
-cats.set("Clerical & Administration",97);
-cats.set("Human Resources",98);
-cats.set("Education",100);
-cats.set("Hotels & Tourism",101);
-cats.set("Accounting & Finance",102);
-cats.set("Manufacturing",103);
-cats.set("Part - Time",104);
-cats.set("Other Jobs",105);
+cats.set("Computers & Accessories",21);
+cats.set("TV - Video - Audio",22);
+cats.set("Cameras & Accessories",23);
+cats.set("Games & Entertainment",24);
+cats.set("Other Home Appliances",25);
+cats.set("Generators,UPS & Power Solutions",26);
+cats.set("Fridge - AC - Washing Machine",27);
+cats.set("Kitchen Appliances",20);
+cats.set("Electronics & Home Appliances",6);
 
-
-
-
-
-
-
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('connected as id ' + connection.threadId);
-});
-
-
-
-
-
-var urlE = 'https://www.olx.com.pk/jobs/?page=';
-spider.url('https://www.olx.com.pk/jobs/');
+var urlE = 'https://www.olx.com.pk/electronics-home-appliances/?page=';
+spider.url('https://www.olx.com.pk/electronics-home-appliances/');
 spider.scraper(function($,done){
     var data = $('table.fixed').scrape({
         cat : function() {
+            return $(this).find('small.breadcrumb.small').text().trim().replace(/[.*+?^${}()|[\]\\\n]/g,' ').split('»')[1].trim().replace(/\w+[.!?]?$/, '');
+          },
+        cat2 : function() {            
             return $(this).find('small.breadcrumb.small').text().trim().split(/\r?\n/)[0];
           },
         links : {sel : 'a.marginright5.link.linkWithHash.detailsLink',attr: 'href'},
@@ -64,21 +42,26 @@ spider.scraper(function($,done){
     
     done(null,data);
 });
-spider.limit(1);
+spider.limit(5);
 spider.result(function(err,req,res){
     if(!err){
         var arr = res.data;
         arr.splice(0, 1);
-        console.log(arr);
+        //console.log(arr);
         arr.forEach(function(data1){ 
-          var catss = data1.cat.split("»");
-          var cats1 = cats.get(catss[0].trim());
-          var cats2 = cats.get(catss[1].trim());
+            console.log(data1.cat2);
+            var catss = data1.cat2.split("»");
+            var cats1 = cats.get(catss[0].trim());
+            var cats2 = cats.get(catss[1].trim());
             if(cats2 && (cats2>cats1)){
-                mysqlPostData(data1.links,data1.image,cats2);                  
+                console.log("case 2");
+                console.log(catss[1].trim());
+                console.log(cats.get(catss[1].trim()));
             }else{
-                mysqlPostData(data1.links,data1.image,cats1);  
-            }  
+                console.log("case 1");
+                console.log(catss[0].trim());
+                console.log(cats.get(catss[0].trim()));
+            }
         })
         count++;
         this.addUrls(urlE+count);

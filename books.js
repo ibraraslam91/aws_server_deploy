@@ -46,7 +46,7 @@ spider.url('https://www.olx.com.pk/books-sports-hobbies/');
 spider.scraper(function($,done){
     var data = $('table.fixed').scrape({
         cat : function() {
-            return $(this).find('small.breadcrumb.small').text().trim().replace(/[.*+?^${}()|[\]\\\n]/g,' ').split('»')[0].trim();
+            return $(this).find('small.breadcrumb.small').text().trim().split(/\r?\n/)[0];
           },
         links : {sel : 'a.marginright5.link.linkWithHash.detailsLink',attr: 'href'},
         image: {sel: 'tr td div span a img', attr : 'src'}
@@ -61,8 +61,14 @@ spider.result(function(err,req,res){
         arr.splice(0, 1);
         console.log(arr);
         arr.forEach(function(data1){ 
-          console.log(data1.links);
-          mysqlPostData(data1.links,data1.image,data1.cat);  
+          var catss = data1.cat.split("»");
+          var cats1 = cats.get(catss[0].trim());
+          var cats2 = cats.get(catss[1].trim());
+            if(cats2 && (cats2>cats1)){
+                mysqlPostData(data1.links,data1.image,cats2);                  
+            }else{
+                mysqlPostData(data1.links,data1.image,cats1);  
+            }  
         })
         count++;
         this.addUrls(urlE+count);
