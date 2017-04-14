@@ -1,0 +1,14 @@
+forever start agriculture.js
+forever start animals.js
+forever start bikes.js
+forever start books.js
+forever start business.js
+forever start electronic.js
+forever start fashion.js
+forever start furnituer.js
+forever start jobs.js
+forever start kids.js
+forever start mobile.js
+forever start property.js
+forever start services.js
+forever start vehicle.js
