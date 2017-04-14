@@ -5,7 +5,7 @@ forever start books.js
 forever start business.js
 forever start electronic.js
 forever start fashion.js
-forever start furnituer.js
+forever start furniture.js
 forever start jobs.js
 forever start kids.js
 forever start mobile.js
