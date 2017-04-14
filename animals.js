@@ -51,8 +51,7 @@ spider.scraper(function($,done){
 spider.limit(1);
 spider.result(function(err,req,res){
     if(!err){
-        var arr = res.data;
-        console.log(res.data);        
+        var arr = res.data;                
         arr.splice(0, 1);
            
         arr.forEach(function(data1){ 
