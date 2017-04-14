@@ -38,14 +38,14 @@ cats.set("Other Jobs",105);
 
 
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   }
 
-  console.log('connected as id ' + connection.threadId);
-});
+//   console.log('connected as id ' + connection.threadId);
+// });
 
 
 
@@ -58,8 +58,8 @@ spider.scraper(function($,done){
         cat : function() {
             return $(this).find('small.breadcrumb.small').text().trim().split(/\r?\n/)[0];
           },
-        links : {sel : 'a.marginright5.link.linkWithHash.detailsLink',attr: 'href'},
-        image: {sel: 'tr td div span a img', attr : 'src'}
+        links : {sel : 'a.marginright5.link.linkWithHash.detailsLink',attr: 'href'}
+       
     });
     
     done(null,data);
@@ -69,15 +69,15 @@ spider.result(function(err,req,res){
     if(!err){
         var arr = res.data;
         arr.splice(0, 1);
-   //     console.log(arr);
+        console.log(arr);
         arr.forEach(function(data1){ 
           var catss = data1.cat.split("»");
           var cats1 = cats.get(catss[0].trim());
           var cats2 = cats.get(catss[1].trim());
             if(cats2 && (cats2>cats1)){
-                mysqlPostData(data1.links,data1.image,cats2);                  
+                mysqlPostData(data1.links,cats2);                  
             }else{
-                mysqlPostData(data1.links,data1.image,cats1);  
+                mysqlPostData(data1.links,cats1);  
             }  
         })
         count++;
@@ -87,8 +87,8 @@ spider.result(function(err,req,res){
     }
 });
 
-function mysqlPostData(href,imgUrl,cat){    
-    var href_post = {'hrefs':href,'imageUrl':imgUrl,'subCh':cat};
+function mysqlPostData(href,cat){    
+    var href_post = {'hrefs':href,'subCh':cat};
     connection.query('INSERT INTO table_jobs SET ?', href_post, function (error, results) {
         if(!error){
 
