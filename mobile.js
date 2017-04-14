@@ -71,9 +71,8 @@ spider.result(function(err,req,res){
     }
 });
 
-function mysqlPostData(href,imgUrl,cat){
-    var sub = cats.get(cat);
-    var href_post = {'hrefs':href,'imageUrl':imgUrl,'subCh':sub};
+function mysqlPostData(href,imgUrl,cat){    
+    var href_post = {'hrefs':href,'imageUrl':imgUrl,'subCh':cat};
     connection.query('INSERT INTO table_mobile SET ?', href_post, function (error, results) {
         if(!error){
 
