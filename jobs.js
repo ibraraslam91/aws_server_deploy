@@ -68,7 +68,7 @@ spider.limit(1);
 spider.result(function(err,req,res){
     if(!err){
         var arr = res.data;
-        arr.splice(0, 1);
+      //  arr.splice(0, 1);
         console.log(arr);
         arr.forEach(function(data1){ 
           var catss = data1.cat.split("»");
