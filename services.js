@@ -17,16 +17,16 @@ var connection = mysql.createConnection({
 var cats = new HashMap();
 
 cats.set("Services",15);
-cat.set("Education & Classes",81);
-cat.set("Web Development",82);
-cat.set("Electronics & Computer Repair",83);
-cat.set("Maids & Domestic Help",84);
-cat.set("Health & Beauty",85);
-cat.set("Travel & Visa",86);
-cat.set("Movers & Packers",87);
-cat.set("Drivers & Taxi",88);
-cat.set("Event Services",89);
-cat.set("Other Services",90);
+cats.set("Education & Classes",81);
+cats.set("Web Development",82);
+cats.set("Electronics & Computer Repair",83);
+cats.set("Maids & Domestic Help",84);
+cats.set("Health & Beauty",85);
+cats.set("Travel & Visa",86);
+cats.set("Movers & Packers",87);
+cats.set("Drivers & Taxi",88);
+cats.set("Event Services",89);
+cats.set("Other Services",90);
 
 
 
