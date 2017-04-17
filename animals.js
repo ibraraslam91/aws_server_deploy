@@ -48,7 +48,7 @@ spider.scraper(function($,done){
     
     done(null,data);
 });
-spider.limit(100);
+spider.limit(500);
 spider.result(function(err,req,res){
     if(!err){
         var arr = res.data;                
