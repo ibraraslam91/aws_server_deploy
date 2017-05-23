@@ -16,18 +16,14 @@ var connection = mysql.createConnection({
 
 var cats = new HashMap();
 
-cats.set("Property for Sale",8);
-cats.set("Houses",33);
-cats.set("Residential Plots",5);
-cats.set("Apartments & Flats",34);
-cats.set("Portions & Floors",35);
-cats.set("Land & Plots",36);
-cats.set("Files",133);
-cats.set("Commercial Plots",134);
-cats.set("Agricultural Land",135);
-cats.set("Industrial Land",136);
-cats.set("Shops - Offices - Commercial Space",37);
-
+cats.set("Property for Rent",125);
+cats.set("Apartments & Flats",126);
+cats.set("Houses",127);
+cats.set("Land & Plots",128);
+cats.set("Portions & Floors",129);
+cats.set("Roommates & Paying Guests",130);
+cats.set("Shops - Offices - Commercial Space",131);
+cats.set("Vacation Rentals - Guest Houses",132);
 
 
 connection.connect(function(err) {
@@ -39,8 +35,8 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-var urlE = 'https://www.olx.com.pk/property-for-sale/?page=';
-spider.url('https://www.olx.com.pk/property-for-sale/');
+var urlE = 'https://www.olx.com.pk/property-for-rent/?page=';
+spider.url('https://www.olx.com.pk/property-for-rent/');
 spider.scraper(function($,done){
     var data = $('table.fixed').scrape({
         cat : function() {

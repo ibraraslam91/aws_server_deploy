@@ -16,13 +16,9 @@ var connection = mysql.createConnection({
 
 var cats = new HashMap();
 
-cats.set("Agriculture & Food",18);
-cats.set("Farm Machinery",115);
-cats.set("Food",116);
-cats.set("Seeds",117);
-cats.set("Fertilizers",118);
-cats.set("Pesticides",119);
-cats.set("Crops",120);
+cats.set("Agriculture",18);
+cats.set("Seeds, Crops, Pesticides & Fertilizers",123);
+cats.set("Farm Machinery & Equipment",124);
 
 
 
@@ -39,8 +35,8 @@ connection.connect(function(err) {
 
 
 
-var urlE = 'https://www.olx.com.pk/agriculture-food/?page=';
-spider.url('https://www.olx.com.pk/agriculture-food/');
+var urlE = 'https://www.olx.com.pk/agriculture/?page=';
+spider.url('https://www.olx.com.pk/agriculture/');
 spider.scraper(function($,done){
     var data = $('table.fixed').scrape({
         cat : function() {
