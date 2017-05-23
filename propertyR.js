@@ -73,7 +73,7 @@ spider.result(function(err,req,res){
 
 function mysqlPostData(href,imgUrl,cat){    
     var href_post = {'hrefs':href,'imageUrl':imgUrl,'subCh':cat};
-    connection.query('INSERT INTO table_property SET ?', href_post, function (error, results) {
+    connection.query('INSERT INTO table_property_R SET ?', href_post, function (error, results) {
             if(!error){
             console.log(results.insertId);
         }
